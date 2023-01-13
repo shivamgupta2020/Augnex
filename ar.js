@@ -324,6 +324,8 @@ var options = {
 };
 
 window.onload = () => {
+
+
   const scene = document.querySelector("a-scene");
   // map = new MapmyIndia.Map("map", {
   //   center: centre,
@@ -333,8 +335,10 @@ window.onload = () => {
 
   function createPolygon(area) {
     area.name = new L.polygon(area.points, { color: area.color });
+    console.log(area.name);
     // map.addLayer(area.name);
   }
+
   function isPointInLayer(user, layer) {
     var within = false;
     var x = user.latitude;
@@ -360,6 +364,7 @@ window.onload = () => {
   }
 
   function renderplace() {
+
     navigator.geolocation.getCurrentPosition(postion => {
       // console.log("calling here", postion);
       data.forEach(area => {
@@ -414,7 +419,9 @@ window.onload = () => {
   data.forEach(area => {
     createPolygon(area);
   });
+
   renderplace();
+
   setInterval(() => {
     renderplace();
   }, 5000);
