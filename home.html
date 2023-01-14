@@ -25,10 +25,10 @@
     vr-mode-ui="enabled: false" embedded
     arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;">
     <!--will be "gps-new-camera" in update version   -->
-    <a-camera gps-camera='gpsMinDistance: 5' rotation-reader> </a-camera>
-    <a-entity gltf-model="./models/Welcome.glft" rotation="0 0 0" scale="30 30 30" 
+    <a-camera gps-camera='minDistance: 5' rotation-reader> </a-camera>
+    <a-entity gltf-model="/models/Welcome.gltf" rotation="0 0 0" scale="30 30 30" 
     gps-entity-place="longitude: 82.984016; latitude: 25.262285;" animation-mixer/>
-    <a-entity gltf-model="./models/Welcome.glft" rotation="0 0 0" scale="30 30 30" 
+    <a-entity gltf-model="/models/Welcome.gltf" rotation="0 0 0" scale="30 30 30" 
     gps-entity-place="longitude: 82.989926; latitude: 25.261793;" animation-mixer/>
   </a-scene>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routes" style="    position: fixed;
@@ -233,7 +233,7 @@
                 icon.setAttribute("src", "./map-marker.png");
                 icon.setAttribute("look-at", "[gps-camera]");
                 icon.setAttribute("scale", "5,5,5");
-                console.log(icon);
+                // console.log(icon);
                 icon.addEventListener('loaded', () => {
                         window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
                });
