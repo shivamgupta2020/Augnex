@@ -335,28 +335,32 @@ window.onload = () => {
 
   function createPolygon(area) {
     area.name = new L.polygon(area.points, { color: area.color });
-    console.log(area.name);
     // map.addLayer(area.name);
   }
 
+
+  /*
+
+  two parameters: userL and layer. 
+  The function checks whether a given point (userL) lies within a polygon represented by the layer.
+
+  */
   function isPointInLayer(user, layer) {
+
     var within = false;
     var x = user.latitude;
     var y = user.longitude;
     for (var ii = 0; ii < layer.getLatLngs().length; ii++) {
       var polyPoints = layer.getLatLngs()[ii];
-      for (
-        var i = 0, j = polyPoints.length - 1;
-        i < polyPoints.length;
-        j = i++
-      ) {
+      for ( var i = 0, j = polyPoints.length - 1; i < polyPoints.length;  j = i++ ) {
+
         var xi = polyPoints[i].lat,
           yi = polyPoints[i].lng;
         var xj = polyPoints[j].lat,
           yj = polyPoints[j].lng;
 
         var intersect =
-          yi > y != yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+         (  ( yi > y ) != ( yj > y ) ) && ( x < ( (xj - xi) * (y - yi) ) / (yj - yi) + xi ) ;
         if (intersect) within = !within;
       }
     }
@@ -366,10 +370,10 @@ window.onload = () => {
   function renderplace() {
 
     navigator.geolocation.getCurrentPosition(postion => {
-      // console.log("calling here", postion);
       data.forEach(area => {
+
+        // check wether the user is in current area 
         if (isPointInLayer(postion.coords, area.name)) {
-          // console.log(area.placeArea);
           if (area.objects.length > 0) {
             area.objects.forEach(object => {
               if (!object.render) {
